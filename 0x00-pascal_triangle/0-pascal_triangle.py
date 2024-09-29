@@ -1,25 +1,21 @@
 #!/usr/bin/python3
+'''A module for working with Pascal's triangle.
+'''
+
 
 def pascal_triangle(n):
-    """
-    Generates a Pascal triangle of height n.
-
-    Args:
-        n (int): The height of the triangle.
-    Returns:
-        list: A 2D array representation of the triangle.
-    """
-    if n <= 0:
-        return []
-
-    triangle = [[1]]
-    for i in range(1, n):
-        current_row = [1]  # Start each row with 1
-        for j in range(1, i):
-            current_row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
-        current_row.append(1)  # End each row with 1
-        triangle.append(current_row)
-    
+    '''Creates a list of lists of integers representing
+    the Pascal's triangle of a given integer.
+    '''
+    triangle = []
+    if type(n) is not int or n <= 0:
+        return triangle
+    for i in range(n):
+        line = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                line.append(1)
+            elif i > 0 and j > 0:
+                line.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+        triangle.append(line)
     return triangle
-
-
